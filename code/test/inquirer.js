@@ -11,7 +11,7 @@ const promptList = [
   },
 ];
 inquirer.prompt(promptList).then((answers) => {
-  console.log(answers); // 返回的结果
+  // console.log(answers); // 返回的结果
   // 执行下载操作
 });
 // const action = (promptList) => {

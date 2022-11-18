@@ -2,7 +2,7 @@
 
 const {program} = require('commander');
 
-console.log('mycli');
+// console.log('mycli');
 
 // 获取后面跟的参数
 // const argv = process.argv[2];

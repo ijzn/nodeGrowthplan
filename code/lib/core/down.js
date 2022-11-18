@@ -3,9 +3,11 @@ const ora = require("ora");
 const chalk = require("chalk");
 const log = console.log;
 
-const downloaAction = async (project, url) => {
+const downloaAction = async ({ project, url }) => {
   const spinner = ora("项目初始化...").start();
-  download(`direct:${url}`, project, { clone: true }, function (err) {
+
+  download(`direct:${url}`, project, {clone: true}, function (err) {
+  // download(`direct:${url}`, project, function (err) {
     if (err) {
       spinner.fail("下载失败");
       log(err);

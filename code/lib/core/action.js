@@ -5,8 +5,8 @@ const downLoad = require("./down.js");
 
 const myAction = async (project, argvs) => {
   // 命令行的执行逻辑代码
-  console.log("action", project);
-  console.log("action", argvs);
+  // console.log("action", project);
+  // console.log("action", argvs);
   const answers = await inquirer.prompt([
     {
       type: "list",
@@ -15,9 +15,8 @@ const myAction = async (project, argvs) => {
       choices: config.frameList,
     },
   ]);
-  console.log("选择结果", answers); // 返回的结果
+  // console.log("选择结果", answers); // 返回的结果
   // 执行下载操作
-  console.log("下载路径：", config.frameUrl[answers.frowName]);
   downLoad({ project, url: config.frameUrl[answers.frowName] });
 };;
 

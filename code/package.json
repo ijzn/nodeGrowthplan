@@ -1,0 +1,23 @@
+{
+  "name": "nodegrowthplan",
+  "version": "1.0.0",
+  "description": "node工程师养成计划",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijzn/nodeGrowthplan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ijzn/nodeGrowthplan/issues"
+  },
+  "homepage": "https://github.com/ijzn/nodeGrowthplan#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

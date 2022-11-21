@@ -1,0 +1,15 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "1. 用户（频道）系统 2. 视频系统 3. 交互系统",
+  "main": "http.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

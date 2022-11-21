@@ -5,15 +5,19 @@ const {promisify} = require('util');
 const app = express();
 
 const readFile = promisify(fs.readFile);
+// 使用urlencoded数据格式
+// app.use(express.urlencoded())
+// 使用json格式
+app.use(express.json());
 
 app.get('/', async (req, res) => {
   
-  try {
-    const data = readFile('./db.js', 'utf8');
-    res.send(data)
-  } catch (error) {
-    res.status(500).json({error})
-  }
+  // try {
+  //   const data = readFile('./db.js', 'utf8');
+  //   res.send(data)
+  // } catch (error) {
+  //   res.status(500).json({error})
+  // }
   if (req.url) {
     res.send(db.users)
   } else {
@@ -21,8 +25,9 @@ app.get('/', async (req, res) => {
     res.send(req)
   }
 });
-app.post('/post', (req, res) => {
-
+app.post('/', async (req, res) => {
+  console.log(req.headers);
+  console.log(req.body);
 });
 
 app.listen(3001, () => {

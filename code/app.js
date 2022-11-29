@@ -6,6 +6,8 @@ const app = express();
 // 使用json格式
 app.use(express.json());
 
+
+
 app.get('/', async (req, res) => {
   
   try {
@@ -89,6 +91,21 @@ app.put('/:id', async (req, res) => {
   }
   
 })
+
+app.get('/list', (req, res) => {
+  console.log(req.method);
+  // JSON.parse('/0------')
+  res.send('/list')
+})
+// 错误中间件 
+app.use((err, req, res, next) => {
+  console.log('======>', err);
+  res.status(500).json({
+    code: 1,
+    msg: err.message,
+  });
+})
+
 
 app.listen(3001, () => {
   console.log("Run http://127.0.0.1:3001");

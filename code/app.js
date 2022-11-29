@@ -8,95 +8,26 @@ app.use(express.json());
 
 
 
-app.get('/', async (req, res) => {
-  
-  try {
-    const data = await db.getDb();
-    console.log('data===>', data);
-    res.send(data);
-  } catch (error) {
-    console.log('error', error);
-    res.status(500).json({error})
-  }
-
-});
-app.post('/', async (req, res) => {
-  console.log(req.headers);
-  console.log(req.body);
-  const body = req.body;
-  if (!body.username) {
-    res.status(403).json({
-      errorMessage: "缺少用户心虚",
-    });
-  } 
-  const dbJosn = await db.getDb();
-  const lastUser = dbJosn.users[dbJosn.users.length - 1];
-  const newUser = {
-    id: lastUser.id + 1,
-    username: body.username,
-    age: body.age || 0,
-  };
-  dbJosn.users.push(newUser);
-  try {
-    let w = await db.saveDb(dbJosn);
-    console.log('===>', w);
-    res.send({
-      code: 0,
-      msg: '更新成功-1',
-      err: w
-    })
-  } catch (error) {
-    res.status(500).json({
-      error,
-    });
-  }
-});
-
-app.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const { username, age } = req.body;
-  console.log(id, username, age);
-  try {
-    let userInfos = await db.getDb();
-    const userId = Number.parseInt(id);
-    const orderItem = userInfos.users.filter((item) => item.id == userId);
-    console.log(orderItem);
-    if (orderItem.length === 0) {
-      res.status(403).json({
-        code: 1,
-        error: '用户不存在'
-      })
-      return;
-    }
-    const newUserInfo = {
-      ...orderItem[0],
-      username: username || orderItem[0].username,
-      age: age || orderItem[0].age,
-    };
-    userInfos.users[id - 1] = newUserInfo;
-    console.log(newUserInfo, userInfos.users);
-    if (!(await db.saveDb(userInfos))) {
-      res.status(200).json({
-        msg: "修改成功",
-      });
-    } else {
-      console.log("==>", 11);
-    }
-
-  } catch (error) {
-    res.status(500).json({
-      code: 1,
-      msg: JSON.stringify(error),
-    });
-  }
-  
-})
-
-app.get('/list', (req, res) => {
-  console.log(req.method);
+// 获取参数
+app.get('/list/:id/vedio/:vid', (req, res) => {
+  console.log(req.method, req.params.id, req.params.vid);
   // JSON.parse('/0------')
   res.send('/list')
 })
+
+app.get("/list", async (req, res) => {
+ res.send(req.url)
+})
+  .post('/user', (req, res) => {
+  res.send(` post ${req.url}`)
+})
+
+// 路由的链式调用
+
+
+
+
+
 // 错误中间件 
 app.use((err, req, res, next) => {
   console.log('======>', err);

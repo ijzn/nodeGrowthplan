@@ -1,43 +1,29 @@
 const express = require('express');
-const db = require('./db.js');
+const cors = require('cors');
+const morgan = require('morgan');
+const router = require('./router')
 const app = express();
-// 使用urlencoded数据格式
-// app.use(express.urlencoded())
+
+// 基础中间件，路由模块，业务逻辑模块 拆分
+/**
+ * 基础中间件
+ * 1. 数据格式解析 内置中间件 express.json()
+ * 2. 日志记录 morgan
+ * 3. 跨域 cors
+ */
 // 使用json格式
 app.use(express.json());
+// 跨域请求
+app.use(cors());
+// 日志记录
+app.use(morgan('dev'))
 
 
+// 路由模块
+app.use('/api/v1', router);
 
-// 获取参数
-app.get('/list/:id/vedio/:vid', (req, res) => {
-  console.log(req.method, req.params.id, req.params.vid);
-  // JSON.parse('/0------')
-  res.send('/list')
-})
+const PORT = process.env.PORT || 3001
 
-app.get("/list", async (req, res) => {
- res.send(req.url)
-})
-  .post('/user', (req, res) => {
-  res.send(` post ${req.url}`)
-})
-
-// 路由的链式调用
-
-
-
-
-
-// 错误中间件 
-app.use((err, req, res, next) => {
-  console.log('======>', err);
-  res.status(500).json({
-    code: 1,
-    msg: err.message,
-  });
-})
-
-
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log("Run http://127.0.0.1:3001");
 });
